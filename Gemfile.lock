@@ -112,7 +112,7 @@ GEM
     dotenv (3.1.8)
     drb (2.2.3)
     ed25519 (1.4.0)
-    erb (5.0.1)
+    erb (5.0.2)
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
@@ -394,6 +394,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  net-protocol
   pg (~> 1.0)
   propshaft
   puma (>= 5.0)
