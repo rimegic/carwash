@@ -1,0 +1,18 @@
+<header class="bg-indigo-600 text-white p-4 shadow-md">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold"><%= link_to "갓차", root_path, class: "text-white no-underline" %></h1>
+    <nav>
+      <ul class="flex space-x-4">
+        <% if user_signed_in? %>
+          <li><%= link_to "대시보드", dashboard_path, class: "hover:text-indigo-200" %></li>
+          <li><%= link_to "요금제", pricing_path, class: "hover:text-indigo-200" %></li>
+          <li><%= link_to "로그아웃", destroy_user_session_path, data: { turbo_method: :delete }, class: "hover:text-indigo-200" %></li>
+        <% else %>
+          <li><%= link_to "로그인", new_user_session_path, class: "hover:text-indigo-200" %></li>
+          <li><%= link_to "회원가입", new_user_registration_path, class: "hover:text-indigo-200" %></li>
+          <li><%= link_to "요금제", pricing_path, class: "hover:text-indigo-200" %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

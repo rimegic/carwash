@@ -1,0 +1,35 @@
+<div class="min-h-screen flex flex-col items-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-5xl w-full space-y-8 p-8 bg-white rounded-xl shadow-2xl border border-gray-100">
+    <h1 class="text-4xl font-extrabold text-gray-900 text-center mb-8">관리자 대시보드</h1>
+
+    <!-- 고객 검색 섹션 -->
+    <div class="bg-gray-50 p-6 rounded-lg shadow-inner mb-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">고객 검색 및 세차 기록</h2>
+      <%= form_with(url: admin_dashboard_path, method: :get, data: { turbo_frame: "user_search_results" }, class: "flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4") do %>
+        <%= email_field_tag :email, params[:email], placeholder: "고객 이메일 입력", class: "flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900" %>
+        <%= submit_tag "검색", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-md transition duration-300 ease-in-out" %>
+      <% end %>
+
+      <div id="user_search_results" class="mt-6 p-4 border border-gray-200 rounded-md bg-white">
+        <% if @user %>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">검색 결과</h3>
+          <p class="mb-2 text-gray-700"><strong>이메일:</strong> <%= @user.email %></p>
+          <p class="mb-4 text-gray-700"><strong>구독 상태:</strong> <%= @user.subscription&.status || "구독 없음" %></p>
+          <%= button_to "세차 완료 기록", admin_wash_logs_path(user_id: @user.id), method: :post, class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out" %>
+        <% elsif params[:email].present? %>
+          <p class="text-red-500">해당 이메일의 사용자를 찾을 수 없습니다.</p>
+        <% else %>
+          <p class="text-gray-500">이메일을 입력하여 고객을 검색하세요.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 일별 가입자 그래프 섹션 -->
+    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">일별 가입자 현황</h2>
+      <div class="bg-white p-4 rounded-md border border-gray-200">
+        <%= line_chart @daily_signups.map { |ds| [ds.date, ds.count] }, id: "dailySignupsChart", height: "300px", library: { scales: { y: { beginAtZero: true } } } %>
+      </div>
+    </div>
+  </div>
+</div>

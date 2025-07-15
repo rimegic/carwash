@@ -1,0 +1,34 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-2xl border border-gray-100">
+    <div>
+      <h2 class="mt-6 text-center text-4xl font-extrabold text-gray-900">비밀번호 변경</h2>
+    </div>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "mt-8 space-y-6" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <%= f.label :password, "새 비밀번호", class: "sr-only" %><br />
+          <% if @minimum_password_length %>
+            <em class="text-xs text-gray-500">(최소 <%= @minimum_password_length %>자)</em><br />
+          <% end %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "새 비밀번호" %>
+        </div>
+
+        <div class="mt-4">
+          <%= f.label :password_confirmation, "새 비밀번호 확인", class: "sr-only" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: "새 비밀번호 확인" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.submit "비밀번호 변경", class: "group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-6 text-sm">
+      <%= link_to "로그인", new_session_path(resource_name), class: "font-medium text-indigo-600 hover:text-indigo-500" %><br />
+    </div>
+  </div>
+</div>

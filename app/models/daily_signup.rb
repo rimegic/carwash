@@ -1,0 +1,2 @@
+class DailySignup < ApplicationRecord
+end

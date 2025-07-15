@@ -1,0 +1,29 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto p-8 bg-white rounded-lg shadow-lg">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">내 대시보드</h1>
+
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-4">구독 정보</h2>
+      <% if current_user.subscription %>
+        <p class="text-lg text-gray-600"><strong>플랜:</strong> <%= current_user.subscription.plan_name.capitalize %></p>
+        <p class="text-lg text-gray-600"><strong>상태:</strong> <%= current_user.subscription.status.capitalize %></p>
+        <p class="text-lg text-gray-600"><strong>만료일:</strong> <%= l(current_user.subscription.expires_at, format: :long) %></p>
+      <% else %>
+        <p class="text-lg text-red-500">구독 정보가 없습니다. <%= link_to "요금제 페이지로 이동", pricing_path, class: "text-indigo-600 hover:underline" %>하여 구독해주세요.</p>
+      <% end %>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-semibold text-gray-700 mb-4">세차 기록</h2>
+      <% if @wash_logs.any? %>
+        <ul class="list-disc pl-5 text-lg text-gray-600">
+          <% @wash_logs.each do |log| %>
+            <li><%= l(log.washed_at, format: :long) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-lg text-gray-500">아직 세차 기록이 없습니다.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
