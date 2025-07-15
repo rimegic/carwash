@@ -28,7 +28,7 @@ RUN apt-get update -qq &&     apt-get install --no-install-recommends -y build-e
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && bundle clean --force
+RUN bundle update net-pop && bundle install && bundle clean --force
 
 # Copy application code
 COPY . .
