@@ -45,6 +45,13 @@
 
 # Ignore development files
 /.devcontainer
+/Procfile.dev
+
+# Ignore test files
+/test/
+
+# Ignore documentation/misc files
+/체크리스트.md
 
 # Ignore Docker-related files
 /.dockerignore
