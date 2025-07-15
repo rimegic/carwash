@@ -20,7 +20,6 @@ gem "tailwindcss-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 gem "devise"
-gem "foreman"
 gem "chartkick"
 gem "net-protocol"
 
